@@ -1,0 +1,16 @@
+.inner-card{
+    border: 10px solid rgb(232, 164, 28);
+}
+
+.name{
+    color: rgb(232, 164, 28);
+}
+
+.names{
+    letter-spacing: 5px;
+}
+
+.certificate{
+    margin: 0;
+    
+}
