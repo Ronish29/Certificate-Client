@@ -42,9 +42,10 @@ function App() {
     e.preventDefault();
     setIsVisible(true);
     generateCertificateId(name, course);
+
   }
 
-  
+
 
   const handleUploadPDF = async (pdfBlob) => {
     const formData = new FormData();
@@ -80,6 +81,9 @@ function App() {
     if (uploadStatus === "Uploaded") {
       setIsVisible(false)
       setUploadStatus('')
+      setName('');
+      setCourse('');
+      setEmail('');
     }
     const getDetails = async () => {
       const response = await axios.get(`${API_URL}/getAllCertificate`);
@@ -89,80 +93,76 @@ function App() {
 
     }
     getDetails();
-  }, [uploadStatus,API_URL]);
+  }, [uploadStatus, API_URL]);
 
 
   return (
     <div >
       <h1 className='text-center text-3xl mt-10 font-bold'>Certificate Generator</h1>
-      <form className='flex flex-col mt-10' onSubmit={handleSubmit}>
-        <div className='flex justify-around items-center '>
-          <div className='flex flex-col w-[70vh] justify-around gap-y-7 '>
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="name"
-                className='text-2xl font-bold font-sans'
-              >Enter Your Name :</label>
-              <input
-                value={name}
-                type="text"
-                className='border px-4 py-3 rounded-md focus:outline-none focus:ring focus:border-blue-200'
-                placeholder="Enter Name"
-                required
-                onChange={(e) => setName(e.target.value)}
-              />
+      <form className="flex flex-col mt-10" onSubmit={handleSubmit}>
+        <div className="md:flex md:justify-around md:items-center md:flex-wrap">
+          <div className="w-full md:w-1/2 md:px-4">
+            <div className="flex flex-col gap-y-7">
+              <div className="flex flex-col gap-2">
+                <label htmlFor="name" className="text-2xl font-bold font-sans">
+                  Enter Your Name :
+                </label>
+                <input
+                  value={name}
+                  type="text"
+                  className="border px-4 py-3 rounded-md focus:outline-none focus:ring focus:border-blue-200"
+                  placeholder="Enter Name"
+                  required
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="course" className="text-2xl font-bold font-sans">
+                  Enter Course :
+                </label>
+                <input
+                  value={course}
+                  type="text"
+                  className="border px-4 py-3 rounded-md focus:outline-none focus:ring focus:border-blue-200"
+                  placeholder="Enter Course"
+                  required
+                  onChange={(e) => setCourse(e.target.value)}
+                />
+              </div>
+              <div className="flex flex-col gap-2">
+                <label htmlFor="email" className="text-2xl font-bold font-sans">
+                  Enter Student's Email
+                </label>
+                <input
+                  value={email}
+                  type="email"
+                  className="border px-4 py-3 rounded-md focus:outline-none focus:ring focus:border-blue-200"
+                  placeholder="Enter email"
+                  required
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
             </div>
-
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="course"
-                className='text-2xl font-bold font-sans'
-              >Enter Course :</label>
-              <input
-                value={course}
-                type="text"
-                className='border px-4 py-3 rounded-md focus:outline-none focus:ring focus:border-blue-200'
-                placeholder="Enter Course"
-                required
-                onChange={(e) => setCourse(e.target.value)}
-              />
-
-            </div>
-
-            <div className='flex flex-col gap-2'>
-              <label htmlFor="email"
-                className='text-2xl font-bold font-sans'
-              >Enter Student's Email </label>
-              <input
-                value={email}
-                type="email"
-                className='border px-4 py-3 rounded-md focus:outline-none focus:ring focus:border-blue-200'
-                placeholder="Enter email"
-                required
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-
           </div>
-          <div className='flex flex-col'>
-            <label htmlFor="date"
-              className='text-2xl font-bold font-sans'
-            >Select Data of approval : </label>
-            <Calendar
-              onChange={handleDateChange}
-              value={date}
-              className='border mt-4'
-            />
+          <div className="w-full md:w-1/2 md:px-4 md:mt-0 mt-8">
+            <div className="flex flex-col">
+              <label htmlFor="date" className="text-2xl font-bold font-sans">
+                Select Data of approval :
+              </label>
+              <Calendar
+                onChange={handleDateChange}
+                value={date}
+                className="border mt-4"
+              />
+            </div>
           </div>
-
         </div>
-
-
-        <div className='flex justify-center items-center mt-10'>
-          <button className='px-6 py-3 bg-blue-600 w-fit rounded-lg text-white'>
+        <div className="flex justify-center items-center mt-10">
+          <button className="px-6 py-3 bg-blue-600 w-fit rounded-lg text-white">
             Submit
           </button>
         </div>
-
-        <div className='flex justify-center items-center mt-10'>
+        <div className="flex justify-center items-center mt-10">
           <p>{uploadStatus}</p>
         </div>
       </form>
@@ -180,10 +180,10 @@ function App() {
         />
       )}
 
-      <div className='grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-x-5 gap-y-6'>
+      <div className='grid gap-x-5 gap-y-6 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 '>
         {
           certificateData.map((item) => (
-            <div key={item.certificateId} className='w-full h-fit px-10 py-6'>
+            <div key={item.certificateId} className='w-full h-fit px-10 py-6 gap-x-5'>
               <InformationCard
                 name={item.name}
                 course={item.course}

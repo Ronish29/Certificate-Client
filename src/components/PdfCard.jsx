@@ -46,8 +46,8 @@ const PdfCard = (props) => {
 
 
     return (
-        <div className='w-full h-fit overflow-x-hidden flex justify-center items-center flex-col'>
-            <div className='w-[calc(100vw-100px)] h-fit certificate p-5' ref={cardRef} >
+        <div className='max-w-full mx-auto flex flex-col '>
+            <div className='min-w-[1200px] h-fit certificate p-5' ref={cardRef} >
                 <div className=' inner-card  relative'>
                     <div className='positioned-images'>
                         <img src={TopLeft}
